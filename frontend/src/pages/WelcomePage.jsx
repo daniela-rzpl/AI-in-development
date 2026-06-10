@@ -2,6 +2,71 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../state/AuthContext";
 
+const MS_CERTIFICATIONS = [
+  {
+    id: "ai-102",
+    code: "AI-102",
+    title: "Azure AI Engineer Associate",
+    level: "Intermediate",
+    description:
+      "Design and implement Azure AI solutions using Azure AI services, Azure AI Search, and Azure OpenAI.",
+    url: "https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-engineer/",
+    tag: "Azure · AI",
+  },
+  {
+    id: "ai-900",
+    code: "AI-900",
+    title: "Azure AI Fundamentals",
+    level: "Beginner",
+    description:
+      "Demonstrate fundamental AI concepts related to the development of software and services on Microsoft Azure.",
+    url: "https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/",
+    tag: "Azure · AI",
+  },
+  {
+    id: "dp-100",
+    code: "DP-100",
+    title: "Azure Data Scientist Associate",
+    level: "Intermediate",
+    description:
+      "Manage data ingestion, model training and deployment, and ML solution monitoring with Python, Azure Machine Learning, and MLflow.",
+    url: "https://learn.microsoft.com/en-us/credentials/certifications/azure-data-scientist/",
+    tag: "Azure · Data",
+  },
+  {
+    id: "sc-500",
+    code: "SC-500",
+    title: "Cloud and AI Security Engineer Associate",
+    level: "Intermediate",
+    description:
+      "New in 2026 — Protect cloud and AI workloads with end-to-end security controls spanning identity, network, storage, compute, and AI.",
+    url: "https://learn.microsoft.com/en-us/credentials/certifications/cloud-ai-security-engineer/",
+    tag: "Security · AI",
+    isNew: true,
+  },
+  {
+    id: "github-copilot",
+    code: "GitHub",
+    title: "GitHub Copilot Certification",
+    level: "Intermediate",
+    description:
+      "Validate your skills in using GitHub Copilot to accelerate development workflows with AI-assisted coding.",
+    url: "https://learn.microsoft.com/en-us/credentials/certifications/github-copilot/",
+    tag: "GitHub · AI",
+    isNew: true,
+  },
+  {
+    id: "github-advanced-security",
+    code: "GitHub",
+    title: "GitHub Advanced Security",
+    level: "Intermediate",
+    description:
+      "Demonstrate expertise in securing codebases using GitHub Advanced Security features including code scanning and secret scanning.",
+    url: "https://learn.microsoft.com/en-us/credentials/certifications/github-advanced-security/",
+    tag: "GitHub · Security",
+  },
+];
+
 function formatDuration(totalSeconds) {
   const safeSeconds = Math.max(totalSeconds, 0);
   const minutes = Math.floor(safeSeconds / 60)
@@ -163,6 +228,37 @@ export function WelcomePage() {
               <h3>Refresh count</h3>
               <p>{refreshCount}</p>
             </article>
+          </div>
+        </section>
+
+        <section className="certifications-section glass-panel">
+          <header className="certifications-header">
+            <h2>Microsoft Certifications 2026</h2>
+            <p className="certifications-subtitle">
+              Latest certifications from Microsoft to validate your cloud, AI, and security skills.
+            </p>
+          </header>
+          <div className="certifications-grid">
+            {MS_CERTIFICATIONS.map((cert) => (
+              <a
+                key={cert.id}
+                className="cert-card"
+                href={cert.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="cert-card-top">
+                  <span className="cert-code">{cert.code}</span>
+                  {cert.isNew && <span className="cert-badge-new">New</span>}
+                </div>
+                <h3 className="cert-title">{cert.title}</h3>
+                <p className="cert-description">{cert.description}</p>
+                <div className="cert-card-footer">
+                  <span className="cert-level">{cert.level}</span>
+                  <span className="cert-tag">{cert.tag}</span>
+                </div>
+              </a>
+            ))}
           </div>
         </section>
 
